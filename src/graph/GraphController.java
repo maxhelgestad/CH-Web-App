@@ -21,11 +21,11 @@ public class GraphController {
 	 */
 	public static LinkedList<Integer> printShortestPath( 
 			ArrayList<ArrayList<Integer>> adj, 
-			int s, int dest, int v) { 
+			int src, int dest, int v) { 
 		// previous[i] array stores previous visited vertex  
 		int previous[] = new int[v];  
 
-		if (BFS(adj, s, dest, v, previous) == false) { 
+		if (BFS(adj, src, dest, v, previous) == false) { 
 			System.out.println("This Destination can't be reached from USA"); 
 			//return; 
 		} 
@@ -69,15 +69,16 @@ public class GraphController {
 		queue.add(src); 
 		// bfs Algorithm 
 		while (!queue.isEmpty()) { 
-			int u = queue.remove(); 
-			for (int i = 0; i < adj.get(u).size(); i++) { 
-				if (visited[adj.get(u).get(i)] == false) { 
-					visited[adj.get(u).get(i)] = true;  
-					previous[adj.get(u).get(i)] = u; 
-					queue.add(adj.get(u).get(i)); 
+			int c = queue.remove(); 
+			for (int i = 0; i < adj.get(c).size(); i++) { 
+				if (visited[adj.get(c).get(i)] == false) { 
+					visited[adj.get(c).get(i)] = true;  
+					previous[adj.get(c).get(i)] = c; 
+					queue.add(adj.get(c).get(i)); 
 					//stops when destination is found
-					if (adj.get(u).get(i) == dest) 
+					if (adj.get(c).get(i) == dest){
 						return true; 
+					}
 				} 
 			} 
 		} 
